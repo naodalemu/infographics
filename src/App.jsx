@@ -30,7 +30,7 @@ const processData = {
         name: "Sorted Tomatoes",
         weight: "1800 kg",
         cost: "£ 950.00",
-        units: "Bulk",
+        units: "",
       },
       losses: [
         { id: "loss1-1", type: "Rotten Tomatoes", weight: "150 kg", cost: "£ 30.00", destinationId: "dest2" },
@@ -46,7 +46,7 @@ const processData = {
         name: "Pre-Cooked Tomato Pulp",
         weight: "1600 kg",
         cost: "£ 1,050.00",
-        units: "Bulk",
+        units: "",
       },
       losses: [
         { id: "loss2-1", type: "Water Evaporation", weight: "100 kg", cost: "£ 0.00", destinationId: "dest3" },
@@ -65,7 +65,7 @@ const processData = {
         name: "Finished Tomato Sauce",
         weight: "1580 kg",
         cost: "£ 1,250.00",
-        units: "Bulk",
+        units: "",
       },
       losses: [
         { id: "loss3-1", type: "Burnt Residue", weight: "20 kg", cost: "£ 5.00", destinationId: "dest1" },
@@ -84,7 +84,7 @@ const processData = {
         name: "Bottled Sauce",
         weight: "1580 kg (sauce) + 770 kg (packaging)",
         cost: "£ 1,860.00",
-        units: "1000 bottles",
+        units: "",
       },
       losses: [
         { id: "loss4-1", type: "Bottle Breakage", weight: "30 kg", cost: "£ 25.00", destinationId: "dest3" },
@@ -103,7 +103,7 @@ const processData = {
         name: "Packed Tomato Sauce Boxes",
         weight: "2650 kg",
         cost: "£ 1,980.00",
-        units: "1000 units",
+        units: "",
       },
       losses: [
         { id: "loss5-1", type: "Label Misprint", weight: "1 kg", cost: "£ 1.00", destinationId: "dest3" },
