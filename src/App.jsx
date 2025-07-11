@@ -311,7 +311,7 @@ const Connectors = ({ data, elementRefs, containerRef }) => {
 
 // --- MAIN APP COMPONENT ---
 
-export default function Infographics() {
+export default function App() {
   const [data] = useState(processData);
   const containerRef = useRef(null);
   
@@ -396,29 +396,43 @@ export default function Infographics() {
                         </React.Fragment>
                     ))}
 
-                    {/* Loss Destinations (Positioned via grid) */}
-                    {data.stages.flatMap((stage, stageIndex) =>
-                        stage.losses.map(loss => {
-                            const destIndex = data.lossDestinations.findIndex(d => d.id === loss.destinationId);
-                            if (destIndex === -1) return null;
-
-                            return (
-                                <div
-                                    key={loss.id}
-                                    className="flex justify-center items-center"
-                                    style={{
-                                        gridColumn: stageIndex + 2,
-                                        gridRow: 5 + destIndex,
-                                    }}
-                                >
+                    {/* --- UPDATED LOSS DESTINATIONS LOGIC --- */}
+                    {data.lossDestinations.map((dest, destIndex) => (
+                      <React.Fragment key={dest.id}>
+                        {data.stages.map((stage, stageIndex) => {
+                          // This container occupies a single cell in the destination grid
+                          return (
+                            <div
+                              key={`${stage.id}-${dest.id}`}
+                              className="flex justify-around items-center" // Mimics the layout of the LossesSection
+                              style={{
+                                gridColumn: stageIndex + 2,
+                                gridRow: 5 + destIndex,
+                              }}
+                            >
+                              {/* We loop over ALL losses for the stage to create a matching structure */}
+                              {stage.losses.map(loss => {
+                                // Only render the card if it belongs in this destination row
+                                if (loss.destinationId === dest.id) {
+                                  return (
                                     <LossDestinationCard
-                                        loss={loss}
-                                        refs={elementRefs.current}
+                                      key={loss.id}
+                                      loss={loss}
+                                      refs={elementRefs.current}
                                     />
-                                </div>
-                            );
-                        })
-                    )}
+                                  );
+                                } else {
+                                  // IMPORTANT: Render an invisible placeholder to maintain spacing
+                                  return (
+                                    <div key={loss.id} className="w-32" /> // Width must match LossDestinationCard
+                                  );
+                                }
+                              })}
+                            </div>
+                          );
+                        })}
+                      </React.Fragment>
+                    ))}
                     
                     <Connectors data={data} elementRefs={elementRefs} containerRef={containerRef} />
                 </div>
