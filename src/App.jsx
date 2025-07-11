@@ -12,95 +12,103 @@ const processData = {
     losses: "Losses",
   },
   lossDestinations: [
-    { id: "dest1", name: "Loss Destination 1", valueRecovery: "Value recovery 4.56 £/t" },
-    { id: "dest2", name: "Loss Destination 2", valueRecovery: "Value recovery 7.89 £/t" },
-    { id: "dest3", name: "Loss Destination 3", valueRecovery: "Value recovery 1.23 £/t" },
+    { id: "dest1", name: "Composting Facility", valueRecovery: "Value recovery 5.00 £/t" },
+    { id: "dest2", name: "Animal Feed", valueRecovery: "Value recovery 8.50 £/t" },
+    { id: "dest3", name: "Landfill", valueRecovery: "Value recovery 0.00 £/t" },
+    { id: "dest4", name: "Anaerobic Digestion", valueRecovery: "Value recovery 6.20 £/t" },
   ],
   stages: [
     {
       id: "stage1",
-      title: "Combining Dry Mix",
-      description: "A longer description of this particular stage that can replace the 'Stage Process Title'",
+      title: "Tomato Reception & Sorting",
+      description: "Raw tomatoes are received, cleaned, and sorted for quality.",
       inputs: [
-        { id: "in1-1", name: "Dry Mix", weight: "158.75 kg", cost: "£ 1,234.56" },
+        { id: "in1-1", name: "Raw Tomatoes", weight: "2000 kg", cost: "£ 1,000.00" },
+        { id: "in1-2", name: "Water (for washing)", weight: "300 kg", cost: "£ 15.00" },
       ],
       productForm: {
-        name: "Dry Mix batches",
-        weight: "158.74 kg",
-        cost: "£ 1,230.00",
-        units: "84 units",
+        name: "Sorted Tomatoes",
+        weight: "1800 kg",
+        cost: "£ 950.00",
+        units: "Bulk",
       },
       losses: [
-        { id: "loss1-1", type: "Loss type", weight: "0.01 t", cost: "£ 4.56", destinationId: "dest2" },
+        { id: "loss1-1", type: "Rotten Tomatoes", weight: "150 kg", cost: "£ 30.00", destinationId: "dest2" },
+        { id: "loss1-2", type: "Foreign Materials", weight: "50 kg", cost: "£ 0.00", destinationId: "dest3" },
       ],
     },
     {
       id: "stage2",
-      title: "Creating Wet Mix",
-      description: "Water is added to the dry mix to create a consistent slurry for the next stage.",
-      inputs: [
-        { id: "in2-1", name: "Water", weight: "90 kg", cost: "£ 90.00" },
-      ],
+      title: "Chopping & Pre-Cooking",
+      description: "Tomatoes are chopped and pre-cooked to remove excess water and concentrate flavor.",
+      inputs: [],
       productForm: {
-        name: "Wet Mix batches",
-        weight: "245.74 kg",
-        cost: "£ 1,320.00",
-        units: "84 units",
+        name: "Pre-Cooked Tomato Pulp",
+        weight: "1600 kg",
+        cost: "£ 1,050.00",
+        units: "Bulk",
       },
       losses: [
-        { id: "loss2-1", type: "Spillage", weight: "1.50 t", cost: "£ 15.00", destinationId: "dest1" },
-        { id: "loss2-2", type: "Evaporation", weight: "1.50 t", cost: "£ 15.00", destinationId: "dest3" },
+        { id: "loss2-1", type: "Water Evaporation", weight: "100 kg", cost: "£ 0.00", destinationId: "dest3" },
+        { id: "loss2-2", type: "Seed & Skin Waste", weight: "100 kg", cost: "£ 20.00", destinationId: "dest1" },
       ],
     },
     {
       id: "stage3",
-      title: "Frying",
-      description: "The wet mix is fried to achieve the desired texture and flavor.",
+      title: "Sauce Cooking",
+      description: "Pre-cooked pulp is simmered with oil, salt, garlic, and herbs.",
       inputs: [
-        { id: "in3-1", name: "Oil", weight: "20 kg", cost: "£ 50.00" },
+        { id: "in3-1", name: "Olive Oil", weight: "50 kg", cost: "£ 150.00" },
+        { id: "in3-2", name: "Salt & Spices", weight: "10 kg", cost: "£ 25.00" },
       ],
       productForm: {
-        name: "Fried Hoops",
-        weight: "16,672.5 kg",
-        cost: "£ 1,350.00",
-        units: "1 Unit",
+        name: "Finished Tomato Sauce",
+        weight: "1580 kg",
+        cost: "£ 1,250.00",
+        units: "Bulk",
       },
       losses: [
-        { id: "loss3-1", type: "Oil Absorption", weight: "0.5 t", cost: "£ 12.50", destinationId: "dest3" },
-        { id: "loss3-2", type: "Breakage", weight: "0.2 t", cost: "£ 5.00", destinationId: "dest1" },
-        { id: "loss3-3", type: "Over-cooking", weight: "0.1 t", cost: "£ 2.50", destinationId: "dest2" },
+        { id: "loss3-1", type: "Burnt Residue", weight: "20 kg", cost: "£ 5.00", destinationId: "dest1" },
+        { id: "loss3-2", type: "Overcooking", weight: "10 kg", cost: "£ 3.00", destinationId: "dest4" },
       ],
     },
     {
       id: "stage4",
-      title: "Drum Coated Flavouring",
-      description: "Flavoring is applied to the fried product in a large coating drum.",
-      inputs: [],
+      title: "Bottling",
+      description: "The cooked sauce is hot-filled into sterilized glass bottles.",
+      inputs: [
+        { id: "in4-1", name: "Glass Bottles", weight: "700 kg", cost: "£ 560.00" },
+        { id: "in4-2", name: "Caps", weight: "70 kg", cost: "£ 50.00" },
+      ],
       productForm: {
-        name: "Hoops Coating Batches",
-        weight: "299.1 kg",
-        cost: "£ 1,400.00",
-        units: "XX units",
+        name: "Bottled Sauce",
+        weight: "1580 kg (sauce) + 770 kg (packaging)",
+        cost: "£ 1,860.00",
+        units: "1000 bottles",
       },
       losses: [
-        { id: "loss4-1", type: "Coating Waste", weight: "0.8 t", cost: "£ 20.00", destinationId: "dest3" },
+        { id: "loss4-1", type: "Bottle Breakage", weight: "30 kg", cost: "£ 25.00", destinationId: "dest3" },
+        { id: "loss4-2", type: "Spillage During Fill", weight: "20 kg", cost: "£ 10.00", destinationId: "dest4" },
       ],
     },
     {
-        id: "stage5",
-        title: "Packing Hoops",
-        description: "The final product is packed into consumer-ready packaging.",
-        inputs: [],
-        productForm: {
-            name: "Packed Hoops",
-            weight: "70.47 g",
-            cost: "£ 238,998 units",
-            units: "1 Unit",
-        },
-        losses: [
-            { id: "loss5-1", type: "Packaging Error", weight: "0.3 t", cost: "£ 7.50", destinationId: "dest2" },
-            { id: "loss5-2", type: "Quality Control", weight: "0.1 t", cost: "£ 2.50", destinationId: "dest1" },
-        ],
+      id: "stage5",
+      title: "Labeling & Final Packing",
+      description: "The bottles are labeled, packed into cartons, and prepared for distribution.",
+      inputs: [
+        { id: "in5-1", name: "Labels", weight: "5 kg", cost: "£ 20.00" },
+        { id: "in5-2", name: "Cardboard Boxes", weight: "300 kg", cost: "£ 100.00" },
+      ],
+      productForm: {
+        name: "Packed Tomato Sauce Boxes",
+        weight: "2650 kg",
+        cost: "£ 1,980.00",
+        units: "1000 units",
+      },
+      losses: [
+        { id: "loss5-1", type: "Label Misprint", weight: "1 kg", cost: "£ 1.00", destinationId: "dest3" },
+        { id: "loss5-2", type: "Box Damage", weight: "10 kg", cost: "£ 5.00", destinationId: "dest1" },
+      ],
     },
   ],
 };
@@ -165,10 +173,12 @@ const ProductFormCard = ({ stage, refs }) => (
       <div className="text-sm text-blue-800 mt-1">
         <span>{stage.productForm.weight}</span> | <span>{stage.productForm.cost}</span>
       </div>
-      <div className="flex items-center justify-center text-xs text-blue-700 mt-2 bg-white/70 rounded-full px-2 py-1">
-        <Info size={12} className="mr-1" />
-        <span>{stage.productForm.units}</span>
-      </div>
+      {stage.productForm.units && 
+        <div className="flex items-center justify-center text-xs text-blue-700 mt-2 bg-white/70 rounded-full px-2 py-1">
+          <Info size={12} className="mr-1" />
+          <span>{stage.productForm.units}</span>
+        </div>
+      }
     </div>
   </div>
 );
@@ -404,7 +414,7 @@ export default function App() {
                           return (
                             <div
                               key={`${stage.id}-${dest.id}`}
-                              className="flex justify-around items-center" // Mimics the layout of the LossesSection
+                              className="flex justify-evenly items-center" // Mimics the layout of the LossesSection
                               style={{
                                 gridColumn: stageIndex + 2,
                                 gridRow: 5 + destIndex,
